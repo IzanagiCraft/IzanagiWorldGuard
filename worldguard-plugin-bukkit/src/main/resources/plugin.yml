@@ -1,0 +1,13 @@
+main: com.izanagicraft.guard.IzanagiWorldGuardPlugin
+name: izanagi-librarian
+version: ${version}
+author:
+  - sanguine6660
+api-version: 1.20
+description: ${description}
+depend:
+  - izanagi-librarian
+  - WorldEdit
+  - FastAsyncWorldEdit
+website: https://github.com/IzanagiCraft/IzanagiWorldGuard
+load: STARTUP
