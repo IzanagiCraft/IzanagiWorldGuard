@@ -1,0 +1,65 @@
+# DO NOT CHANGE
+config-version: 1
+
+threading:
+  poolSize: 64
+  corePoolSize: 4
+
+defaultFlags:
+  # Allows or denies building
+  build: false
+  # Allows or denies block breaking
+  break: false
+  # Allows or denies block placement
+  place: false
+  # Allows or denies interaction with blocks/entities
+  interact: true
+  # Allows or denies player versus player combat
+  pvp: false
+  # Allows or denies mob spawning
+  mob_spawning: true
+  # Allows or denies explosions
+  explosions: false
+  # Allows or denies fire spread
+  fire_spread: false
+  # Allows or denies entry into the region
+  entry: true
+  # Allows or denies exit from the region
+  exit: true
+  # Allows or denies teleportation
+  teleport: true
+  # Allows or denies damage to entities
+  damage: true
+  # Allows or denies healing entities
+  heal: true
+  # Allows or denies dropping items
+  item_drop: false
+  # Allows or denies picking up items
+  item_pickup: false
+  # Allows or denies block physics (e.g., sand falling)
+  block_physics: true
+  # Allows or denies hunger loss
+  hunger: false
+  # Allows or denies weather changes
+  weather_change: true
+  # Allows or denies command execution
+  command_execute: true
+  # Allows or denies item usage (e.g., right-click actions)
+  item_use: true
+  # Allows or denies entity damage
+  entity_damage: true
+  # Allows or denies entity spawning
+  entity_spawn: true
+  # Allows or denies monster damage
+  monster_damage: true
+  # Allows or denies monster spawning
+  monster_spawn: true
+  # Allows or denies animal damage
+  animal_damage: true
+  # Allows or denies animal spawning
+  animal_spawn: true
+  # Allows or denies flying
+  fly: false
+  # Allows or denies entering portals
+  portal_enter: true
+
