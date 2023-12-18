@@ -136,7 +136,7 @@ public interface RegionManager {
      * @param location The location to check for containment.
      * @param minPoint The minimum point of the cuboid.
      * @param maxPoint The maximum point of the cuboid.
-     * @return A CompletableFuture<Boolean> representing {@code true} if the location is within the cuboid, {@code false} otherwise.
+     * @return A CompletableFuture&lt;Boolean&gt; representing {@code true} if the location is within the cuboid, {@code false} otherwise.
      */
     default CompletableFuture<Boolean> isLocationInCuboidAsync(Location location, Location minPoint, Location maxPoint) {
         return CompletableFuture.supplyAsync(() -> isLocationInCuboid(location, minPoint, maxPoint));
@@ -149,7 +149,7 @@ public interface RegionManager {
      * @param region1Max The maximum point of the first region.
      * @param region2Min The minimum point of the second region.
      * @param region2Max The maximum point of the second region.
-     * @return A CompletableFuture<Boolean> representing {@code true} if the regions intersect, {@code false} otherwise.
+     * @return A CompletableFuture&lt;Boolean&gt; representing {@code true} if the regions intersect, {@code false} otherwise.
      */
     default public CompletableFuture<Boolean> doRegionsIntersectAsync(Location region1Min, Location region1Max,
                                                                       Location region2Min, Location region2Max) {
@@ -161,7 +161,7 @@ public interface RegionManager {
      *
      * @param location The location to check for containment.
      * @param region   The region to check against.
-     * @return A CompletableFuture<Boolean> representing {@code true} if the location is within the region, {@code false} otherwise.
+     * @return A CompletableFuture&lt;Boolean&gt; representing {@code true} if the location is within the region, {@code false} otherwise.
      */
     default CompletableFuture<Boolean> isLocationInRegionAsync(Location location, GuardedRegion region) {
         return isLocationInCuboidAsync(location, region.getMinPoint(), region.getMaxPoint());
@@ -172,7 +172,7 @@ public interface RegionManager {
      *
      * @param region1 The first region to check for intersection.
      * @param region2 The second region to check for intersection.
-     * @return A CompletableFuture<Boolean> representing {@code true} if the regions intersect, {@code false} otherwise.
+     * @return A CompletableFuture&lt;Boolean&gt; representing {@code true} if the regions intersect, {@code false} otherwise.
      */
     default CompletableFuture<Boolean> doRegionsIntersectAsync(GuardedRegion region1, GuardedRegion region2) {
         return doRegionsIntersectAsync(region1.getMinPoint(), region1.getMaxPoint(), region2.getMinPoint(), region2.getMaxPoint());

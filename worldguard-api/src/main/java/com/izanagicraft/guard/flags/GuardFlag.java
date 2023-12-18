@@ -56,7 +56,7 @@ package com.izanagicraft.guard.flags;
  * a specific aspect of gameplay, such as building, breaking blocks, interacting with entities,
  * and more.
  *
- * @author <a href="https:  //github.com/sanguine6660">@sanguine6660</a>
+ * @author <a href="https://github.com/sanguine6660">@sanguine6660</a>
  * @since 17.12.2023
  */
 public enum GuardFlag {
