@@ -7,7 +7,7 @@ dependencies {
 tasks.named<ShadowJar>("shadowJar") {
     this.archiveClassifier.set(null as String?)
     this.archiveFileName.set("${project.name}-${project.version}.${this.archiveExtension.getOrElse("jar")}")
-    this.destinationDirectory.set(file("$projectDir/out"))
+    this.destinationDirectory.set(file("$projectDir/../out"))
     // Get rid of all the libs which are 100% unused.
     minimize()
     mergeServiceFiles()
