@@ -207,7 +207,8 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
                 new BuildingListener(this),
                 new InventoryItemChangeListener(this),
                 new EntityStatsChangeListener(this),
-                new BlockPhysicsListener(this)
+                new BlockPhysicsListener(this),
+                new PlayerChatListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 

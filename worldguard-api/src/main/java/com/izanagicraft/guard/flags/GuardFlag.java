@@ -159,6 +159,11 @@ public enum GuardFlag {
     COMMAND_EXECUTE("command_execute", List.of()),
 
     /**
+     * Allows or denies chatting.
+     */
+    CHATTING("chatting", List.of()),
+
+    /**
      * Allows or denies item usage (e.g., right-click actions).
      */
     ITEM_USE("item_use", List.of()),

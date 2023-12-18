@@ -44,6 +44,8 @@ defaultFlags:
   weather_change: true
   # Allows or denies command execution
   command_execute: true
+  # Allows or denies chatting
+  chatting: true
   # Allows or denies item usage (e.g., right-click actions)
   item_use: true
   # Allows or denies entity damage
