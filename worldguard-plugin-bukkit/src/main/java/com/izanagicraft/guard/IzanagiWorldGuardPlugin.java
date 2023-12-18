@@ -64,6 +64,12 @@ import java.util.concurrent.*;
 
 /**
  * IzanagiWorldGuard; com.izanagicraft.guard:IzanagiWorldGuardPlugin
+ * <p>
+ * Main class for the IzanagiWorldGuard plugin.
+ * <p>
+ * This class extends the Bukkit {@link JavaPlugin} class and serves as the entry point for the plugin.
+ * It manages the initialization, configuration loading, event registration, command registration,
+ * and scheduling of tasks for the IzanagiWorldGuard plugin.
  *
  * @author <a href="https://github.com/sanguine6660">@sanguine6660</a>
  * @since 17.12.2023
@@ -72,6 +78,11 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
 
     private static IzanagiWorldGuardPlugin instance;
 
+    /**
+     * Gets the singleton instance of the IzanagiWorldGuardPlugin.
+     *
+     * @return The instance of the plugin.
+     */
     public static IzanagiWorldGuardPlugin getInstance() {
         return instance;
     }
@@ -116,6 +127,9 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         MessageUtils.sendPrefixedMessage(Bukkit.getConsoleSender(), "Guard disabled...");
     }
 
+    /**
+     * Saves configurations for all loaded worlds.
+     */
     private void saveConfigurations() {
         getWorldConfigs().keySet().forEach(worldName -> {
             if (getWorldConfigFiles().containsKey(worldName)) {
@@ -128,15 +142,24 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         });
     }
 
+    /**
+     * Loads plugin configurations, including default configurations and reloads existing ones.
+     */
     private void loadConfigurations() {
         this.saveDefaultConfig();
         this.reloadConfigurations();
     }
 
-    private void reloadConfigurations() {
+    /**
+     * Reloads plugin configurations, including the main configuration file.
+     */
+    public void reloadConfigurations() {
         this.reloadConfig();
     }
 
+    /**
+     * Prepares the plugin by initializing necessary components, such as executors and configuration maps.
+     */
     private void prepare() {
         this.executor = Executors.newFixedThreadPool(this.getConfig().getInt("threading.poolSize", 64));
         this.scheduler = Executors.newScheduledThreadPool(this.getConfig().getInt("threading.corePoolSize", 8));
@@ -147,9 +170,17 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
 
     }
 
+    /**
+     * Loads plugin providers.
+     * TODO: Implement provider loading
+     */
     private void loadProviders() {
+        // TODO: Implement provider loading
     }
 
+    /**
+     * Registers plugin commands with the Bukkit command map.
+     */
     private void loadCommands() {
         CommandMap commandMap = Bukkit.getCommandMap();
         List.of(
@@ -157,6 +188,9 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         ).forEach(command -> commandMap.register("guard", (GuardCommand) command));
     }
 
+    /**
+     * Registers plugin events with the Bukkit plugin manager.
+     */
     private void loadEvents() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         List.of(
@@ -165,23 +199,46 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 
+    /**
+     * Starts scheduled tasks, such as periodic configuration saving.
+     */
     private void startSchedulers() {
-        // save configs each 5 minutes to keep it up to date
+        // save configs each 5 minutes to keep it up to date in the file system
         this.scheduler.scheduleAtFixedRate(this::saveConfigurations, 0, 5, TimeUnit.MINUTES);
     }
 
+    /**
+     * Gets the map of world configurations.
+     *
+     * @return The map of world configurations.
+     */
     public Map<String, YamlConfiguration> getWorldConfigs() {
         return worldConfigs;
     }
 
+    /**
+     * Gets the map of world configuration files.
+     *
+     * @return The map of world configuration files.
+     */
     public Map<String, File> getWorldConfigFiles() {
         return worldConfigFiles;
     }
 
+    /**
+     * Gets the executor service used by the plugin.
+     *
+     * @return The executor service.
+     */
     public ExecutorService getExecutor() {
         return executor;
     }
 
+    /**
+     * Gets the scheduled executor service used by the plugin.
+     *
+     * @return The scheduled executor service.
+     */
     public ScheduledExecutorService getScheduler() {
         return scheduler;
     }
