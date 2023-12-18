@@ -52,6 +52,7 @@ import com.izanagicraft.guard.permissions.GuardPermission;
 import com.izanagicraft.guard.utils.MessageUtils;
 import com.izanagicraft.guard.utils.StringUtils;
 import org.bukkit.command.Command;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.ArrayList;
@@ -75,9 +76,9 @@ public class WorldGuardCommand extends GuardCommand {
     public WorldGuardCommand(IzanagiWorldGuardPlugin plugin) {
         super("worldguard");
         this.plugin = plugin;
-        setAliases(List.of("wg", "guard"));
+        setAliases(List.of("g", "wg", "guard"));
         setDescription("Guard your worlds and set region specific flags.");
-        setUsage("&e/worldguard <reload/flag> [flag: <flagname> <value>]");
+        setUsage("&e/worldguard <reload/flag/flags/tp> [flag: <flagname> <value> | tp: <regionName>]");
         setPermission(GuardPermission.COMMAND_WORLDGUARD.getName());
     }
 
@@ -120,7 +121,7 @@ public class WorldGuardCommand extends GuardCommand {
                     return;
                 }
 
-                if (argCount == 3) {
+                if (argCount >= 3) {
                     GuardFlag choice = GuardFlag.getByName(args[1]);
                     if (choice == null) {
                         break;
@@ -153,6 +154,56 @@ public class WorldGuardCommand extends GuardCommand {
                     return;
                 }
                 break;
+            case "flags":
+                if (!source.isPlayer()) {
+                    MessageUtils.sendPrefixedMessage(source, "&cYou can only run this command as a player.");
+                    return;
+                }
+
+                YamlConfiguration config = plugin.getWorldConfigs().get(source.getPlayer().getWorld().getName());
+
+                if (config == null) {
+                    MessageUtils.sendPrefixedMessage(source, "&cYour current world is not under protection. &aYou can remove it in the WorldGuard config.yml in section 'ignored' to protect it properly.");
+                    return;
+                }
+
+                List<String> lines = new ArrayList<>();
+
+                // TODO: add paginated functionality
+                // TODO: send wrapped interactive component to make command suggestions on changing value of a flag
+
+                ConfigurationSection flagSection = config.getConfigurationSection("flags");
+
+                flagSection.getKeys(false).forEach(flag -> {
+                    GuardFlag guardFlag = GuardFlag.getByName(flag);
+
+                    if (guardFlag != null) {
+                        String flagValue = flagSection.getString(flag);
+                        boolean hasValueEnabled = (!flagValue.equalsIgnoreCase("empty") &&
+                                !flagValue.equalsIgnoreCase("deny") &&
+                                !flagValue.equalsIgnoreCase("false") && !flagValue.isEmpty());
+
+                        lines.add("&8» &7" + flag + ": " + (hasValueEnabled ? "&a" : "&c") + flagValue + "&r");
+                    }
+                });
+
+                MessageUtils.sendWrappedMessage(source, lines.toArray(new String[lines.size()]));
+                return;
+
+            case "tp":
+                if (!source.isPlayer()) {
+                    MessageUtils.sendPrefixedMessage(source, "&cYou can only run this command as a player.");
+                    return;
+                }
+
+                if (argCount >= 2 && args[1].equalsIgnoreCase("__global__")) {
+                    // TODO: add region based tp command
+                    source.getPlayer().teleport(source.getPlayer().getWorld().getSpawnLocation().add(0.5, 1, 0.5));
+                    MessageUtils.sendPrefixedMessage(source, "&aYou have been teleported to &e" + args[1] + " &a.");
+                    return;
+                }
+
+                break;
             default:
                 break;
         }
@@ -171,8 +222,18 @@ public class WorldGuardCommand extends GuardCommand {
         if (argCount == 1) {
             available.add("reload");
             available.add("flag");
+            available.add("flags");
+            available.add("tp");
 
             StringUtils.copyPartialMatches(args[0], available, completions);
+            return completions;
+        }
+
+        if (argCount == 2 && args[0].equalsIgnoreCase("tp")) {
+            // TODO: add list of available regions
+            available.add("__global__");
+            StringUtils.copyPartialMatches(args[1], available, completions);
+            return completions;
         }
 
         if (argCount == 2 && args[0].equalsIgnoreCase("flag")) {
@@ -182,6 +243,7 @@ public class WorldGuardCommand extends GuardCommand {
             }
 
             StringUtils.copyPartialMatches(args[1], available, completions);
+            return completions;
         }
 
         if (argCount == 3 && args[0].equalsIgnoreCase("flag")) {
@@ -192,6 +254,7 @@ public class WorldGuardCommand extends GuardCommand {
             available.addAll(choice.getValidValues());
             // System.out.println(String.join(", ", available));
             StringUtils.copyPartialMatches(args[2], available, completions);
+            return completions;
         }
 
 

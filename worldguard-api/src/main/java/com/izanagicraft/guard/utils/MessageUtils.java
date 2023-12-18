@@ -67,8 +67,7 @@ import java.io.StringWriter;
  */
 public class MessageUtils {
 
-    private static LegacyComponentSerializer componentSerializer = LegacyComponentSerializer.builder()
-            .character('&').hexCharacter('#').build();
+    private static LegacyComponentSerializer componentSerializer = LegacyComponentSerializer.builder().character('&').hexCharacter('#').build();
 
     /**
      * Gets the instance of LegacyComponentSerializer used for message formatting.
@@ -129,8 +128,7 @@ public class MessageUtils {
      * @param lines  The array of message lines to wrap and send.
      */
     public static void sendWrappedMessage(CommandSender sender, String... lines) {
-        sendMessage(sender, "\n" + GuardConstants.CHAT_COLOR +
-                String.join("\n" + GuardConstants.CHAT_COLOR, lines));
+        sendMessage(sender, "\n" + GuardConstants.HEADER + "\n" + GuardConstants.CHAT_COLOR + String.join("\n" + GuardConstants.CHAT_COLOR, lines) + "\n&r" + GuardConstants.FOOTER);
     }
 
     /**
@@ -145,8 +143,7 @@ public class MessageUtils {
         throwable.printStackTrace(pw);
         String stackTrace = sw.toString();
 
-        String errorMessage = GuardConstants.CHAT_PREFIX +
-                "&cAn unhandled error occurred: " + throwable.getMessage() + "\n\n" + stackTrace;
+        String errorMessage = GuardConstants.CHAT_PREFIX + "&cAn unhandled error occurred: " + throwable.getMessage() + "\n\n" + stackTrace;
 
         sendMessage(sender, errorMessage);
     }
