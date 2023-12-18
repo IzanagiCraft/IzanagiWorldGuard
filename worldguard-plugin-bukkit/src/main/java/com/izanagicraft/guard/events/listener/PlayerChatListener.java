@@ -47,7 +47,7 @@ public class PlayerChatListener  extends GuardListener {
 
         boolean allowAction = true;
 
-        String allow = worldConfig.getString("flags." + GuardFlag.CHATTING.getFlagName(), "false");
+        String allow = worldConfig.getString("flags." + GuardFlag.CHATTING.getFlagName(), "true");
 
         if (allow.isEmpty() || allow.equalsIgnoreCase("empty")
                 || allow.equalsIgnoreCase("false") || allow.equalsIgnoreCase("deny")) {
@@ -83,7 +83,7 @@ public class PlayerChatListener  extends GuardListener {
 
         boolean allowAction = true;
 
-        String allow = worldConfig.getString("flags." + GuardFlag.COMMAND_EXECUTE.getFlagName(), "false");
+        String allow = worldConfig.getString("flags." + GuardFlag.COMMAND_EXECUTE.getFlagName(), "true");
 
         if (allow.isEmpty() || allow.equalsIgnoreCase("empty")
                 || allow.equalsIgnoreCase("false") || allow.equalsIgnoreCase("deny")) {
