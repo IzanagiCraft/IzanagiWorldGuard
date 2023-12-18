@@ -50,6 +50,7 @@ import com.izanagicraft.guard.commands.GuardCommand;
 import com.izanagicraft.guard.commands.WorldGuardCommand;
 import com.izanagicraft.guard.events.listener.BuildingListener;
 import com.izanagicraft.guard.events.listener.DisableMessageBroadcast;
+import com.izanagicraft.guard.events.listener.InventoryItemChangeListener;
 import com.izanagicraft.guard.events.listener.WorldLoadEventListener;
 import com.izanagicraft.guard.utils.MessageUtils;
 import org.bukkit.Bukkit;
@@ -206,7 +207,8 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         List.of(
                 new DisableMessageBroadcast(this),
                 new WorldLoadEventListener(this),
-                new BuildingListener(this)
+                new BuildingListener(this),
+                new InventoryItemChangeListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 

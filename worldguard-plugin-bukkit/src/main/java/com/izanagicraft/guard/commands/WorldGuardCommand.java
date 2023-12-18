@@ -141,7 +141,7 @@ public class WorldGuardCommand extends GuardCommand {
                         return;
                     }
 
-                    config.set("flags." + choice.getFlagName(), newValue);
+                    plugin.getWorldConfigs().get(source.getPlayer().getWorld().getName()).set("flags." + choice.getFlagName(), newValue);
 
                     MessageUtils.sendPrefixedMessage(source, StringUtils.fastFormat(
                             "&aSuccessfully &7set flag [&e${flag}&7] for region [&7${region}&7] to [&9${newValue}&7].",
