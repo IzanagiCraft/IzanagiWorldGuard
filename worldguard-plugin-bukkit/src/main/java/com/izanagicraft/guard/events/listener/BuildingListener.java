@@ -102,14 +102,14 @@ public class BuildingListener extends GuardListener {
         boolean allowBuild = false;
 
         String build = worldConfig.getString("flags." + GuardFlag.BUILD.getFlagName(), "false");
-        if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("disabled")) {
+        if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("deny")) {
             allowBuild = false;
         }
 
-        String place = worldConfig.getString("flags." + GuardFlag.PLACE.getFlagName(), "false");
-        if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("disabled")) {
+        String placeBlock = worldConfig.getString("flags." + GuardFlag.PLACE.getFlagName(), "false");
+        if (placeBlock.isEmpty() || placeBlock.equals("empty") || placeBlock.equals("false") || placeBlock.equals("deny")) {
             allowBuild = false;
-        } else if (build.equals("true") || build.equals("enabled")) {
+        } else if (placeBlock.equals("true") || placeBlock.equals("allow")) {
             allowBuild = true;
         }
 
@@ -147,14 +147,14 @@ public class BuildingListener extends GuardListener {
         boolean allowBuild = false;
 
         String build = worldConfig.getString("flags." + GuardFlag.BUILD.getFlagName(), "false");
-        if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("disabled")) {
+        if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("deny")) {
             allowBuild = false;
         }
 
-        String place = worldConfig.getString("flags." + GuardFlag.BREAK.getFlagName(), "false");
-        if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("disabled")) {
+        String breakBlock = worldConfig.getString("flags." + GuardFlag.BREAK.getFlagName(), "false");
+        if (breakBlock.isEmpty() || breakBlock.equals("empty") || breakBlock.equals("false") || breakBlock.equals("deny")) {
             allowBuild = false;
-        } else if (build.equals("true") || build.equals("enabled")) {
+        } else if (breakBlock.equals("true") || breakBlock.equals("allow")) {
             allowBuild = true;
         }
 
