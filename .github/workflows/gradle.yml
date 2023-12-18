@@ -1,4 +1,4 @@
-name: Gradle Build and GitHub Release
+name: Gradle Build, Test and GitHub Release
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build and Release on GitHub
+    name: Build, Test and Release on GitHub
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build and Test
-        run: ./gradlew licenseFormat build
+        run: ./gradlew licenseFormat test build
 
       - name: Get Old Release Tag
         id: get_old_release
