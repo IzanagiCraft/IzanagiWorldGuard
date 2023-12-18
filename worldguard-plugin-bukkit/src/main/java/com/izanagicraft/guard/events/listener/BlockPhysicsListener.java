@@ -52,12 +52,17 @@ import com.izanagicraft.guard.flags.GuardFlag;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockFromToEvent;
+import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 
 /**
  * IzanagiWorldGuard; com.izanagicraft.guard.events.listener:BlockPhysicsListener
- *
+ * <p>
  * Handles the BlockPhysicsEvent to enforce block_physics-related flags within protected regions.
  *
  * @author <a href="https://github.com/sanguine6660">@sanguine6660</a>
@@ -106,4 +111,141 @@ public class BlockPhysicsListener extends GuardListener {
         if (!allowPhysics) event.setCancelled(true);
 
     }
+
+    /**
+     * Handles the BlockFromToEvent to enforce block_physics-related flags within protected regions.
+     *
+     * @param event The BlockFromToEvent.
+     */
+    @EventHandler
+    public void onBlockPhysicsUpdate(BlockFromToEvent event) {
+        Block block = event.getBlock();
+        Block block2 = event.getToBlock();
+
+        if (block == null || block2 == null) {
+            event.setCancelled(true);
+            return;
+        }
+
+        Location target = block.getLocation();
+        Location target2 = block2.getLocation();
+
+        YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
+        if (worldConfig == null) return;
+
+        boolean allowPhysics = true;
+
+        String allow = worldConfig.getString("flags." + GuardFlag.BLOCK_PHYSICS.getFlagName(), "false");
+
+        if (allow.isEmpty() || allow.equalsIgnoreCase("empty")
+                || allow.equalsIgnoreCase("false") || allow.equalsIgnoreCase("deny")) {
+            allowPhysics = false;
+        }
+
+        // TODO: region based checks both blocks.
+
+        if (!allowPhysics) event.setCancelled(true);
+
+    }
+
+    /**
+     * Handles the BlockIgniteEvent to enforce fire_spread-related flags within protected regions.
+     *
+     * @param event The BlockIgniteEvent.
+     */
+    @EventHandler
+    public void onBlockPhysicsUpdate(BlockIgniteEvent event) {
+        Block block = event.getBlock();
+
+        if (block == null) {
+            event.setCancelled(true);
+            return;
+        }
+
+        Location target = block.getLocation();
+
+        YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
+        if (worldConfig == null) return;
+
+        boolean allowPhysics = true;
+
+        String allow = worldConfig.getString("flags." + GuardFlag.FIRE_SPREAD.getFlagName(), "false");
+
+        if (allow.isEmpty() || allow.equalsIgnoreCase("empty")
+                || allow.equalsIgnoreCase("false") || allow.equalsIgnoreCase("deny")) {
+            allowPhysics = false;
+        }
+
+        // TODO: region based checks both blocks.
+
+        if (!allowPhysics) event.setCancelled(true);
+
+    }
+
+    /**
+     * Handles the EntityExplodeEvent to enforce explosion-related flags within protected regions.
+     *
+     * @param event The EntityExplodeEvent.
+     */
+    @EventHandler
+    public void onBlockPhysicsUpdate(EntityExplodeEvent event) {
+        Entity entity = event.getEntity();
+
+        if (entity == null) {
+            event.setCancelled(true);
+            return;
+        }
+
+        Location target = entity.getLocation();
+
+        YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
+        if (worldConfig == null) return;
+
+        boolean allowPhysics = true;
+
+        String allow = worldConfig.getString("flags." + GuardFlag.EXPLOSIONS.getFlagName(), "false");
+
+        if (allow.isEmpty() || allow.equalsIgnoreCase("empty")
+                || allow.equalsIgnoreCase("false") || allow.equalsIgnoreCase("deny")) {
+            allowPhysics = false;
+        }
+
+        // TODO: region based checks both blocks.
+
+        if (!allowPhysics) event.setCancelled(true);
+    }
+
+    /**
+     * Handles the BlockExplodeEvent to enforce explosion-related flags within protected regions.
+     *
+     * @param event The BlockExplodeEvent.
+     */
+    @EventHandler
+    public void onBlockPhysicsUpdate(BlockExplodeEvent event) {
+        Block block = event.getBlock();
+
+        if (block == null) {
+            event.setCancelled(true);
+            return;
+        }
+
+        Location target = block.getLocation();
+
+        YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
+        if (worldConfig == null) return;
+
+        boolean allowPhysics = true;
+
+        String allow = worldConfig.getString("flags." + GuardFlag.EXPLOSIONS.getFlagName(), "false");
+
+        if (allow.isEmpty() || allow.equalsIgnoreCase("empty")
+                || allow.equalsIgnoreCase("false") || allow.equalsIgnoreCase("deny")) {
+            allowPhysics = false;
+        }
+
+        // TODO: region based checks both blocks.
+
+        if (!allowPhysics) event.setCancelled(true);
+    }
+
 }
