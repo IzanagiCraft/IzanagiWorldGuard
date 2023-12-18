@@ -150,6 +150,16 @@ public class WorldGuardCommand extends GuardCommand {
             StringUtils.copyPartialMatches(args[1], available, completions);
         }
 
+        if (argCount == 3 && args[0].equalsIgnoreCase("flag")) {
+            // TODO: filter permission based flag values
+            GuardFlag choice = GuardFlag.getByName(args[1]);
+            // System.out.println("Choice: " + choice);
+            if (choice == null) return completions;
+            available.addAll(choice.getValidValues());
+            // System.out.println(String.join(", ", available));
+            StringUtils.copyPartialMatches(args[2], available, completions);
+        }
+
 
         return completions;
     }

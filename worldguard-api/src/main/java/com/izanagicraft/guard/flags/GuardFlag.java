@@ -46,6 +46,9 @@
 
 package com.izanagicraft.guard.flags;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * IzanagiWorldGuard; com.izanagicraft.guard.flags:GuardFlag
  * <p>
@@ -63,142 +66,142 @@ public enum GuardFlag {
     /**
      * Allows or denies building.
      */
-    BUILD("build"),
+    BUILD("build", List.of()),
 
     /**
      * Allows or denies block breaking.
      */
-    BREAK("break"),
+    BREAK("break", List.of()),
 
     /**
      * Allows or denies block placement.
      */
-    PLACE("place"),
+    PLACE("place", List.of()),
 
     /**
      * Allows or denies interaction with blocks/entities.
      */
-    INTERACT("interact"),
+    INTERACT("interact", List.of()),
 
     /**
      * Allows or denies player versus player combat.
      */
-    PVP("pvp"),
+    PVP("pvp", List.of()),
 
     /**
      * Allows or denies mob spawning.
      */
-    MOB_SPAWNING("mob_spawning"),
+    MOB_SPAWNING("mob_spawning", List.of()),
 
     /**
      * Allows or denies explosions.
      */
-    EXPLOSIONS("explosions"),
+    EXPLOSIONS("explosions", List.of()),
 
     /**
      * Allows or denies fire spread.
      */
-    FIRE_SPREAD("fire_spread"),
+    FIRE_SPREAD("fire_spread", List.of()),
 
     /**
      * Allows or denies entry into the region.
      */
-    ENTRY("entry"),
+    ENTRY("entry", List.of()),
 
     /**
      * Allows or denies exit from the region.
      */
-    EXIT("exit"),
+    EXIT("exit", List.of()),
 
     /**
      * Allows or denies teleportation.
      */
-    TELEPORT("teleport"),
+    TELEPORT("teleport", List.of()),
 
     /**
      * Allows or denies damage to entities.
      */
-    DAMAGE("damage"),
+    DAMAGE("damage", List.of()),
 
     /**
      * Allows or denies healing entities.
      */
-    HEAL("heal"),
+    HEAL("heal", List.of()),
 
     /**
      * Allows or denies dropping items.
      */
-    ITEM_DROP("item_drop"),
+    ITEM_DROP("item_drop", List.of()),
 
     /**
      * Allows or denies picking up items.
      */
-    ITEM_PICKUP("item_pickup"),
+    ITEM_PICKUP("item_pickup", List.of()),
 
     /**
      * Allows or denies block physics (e.g., sand falling).
      */
-    BLOCK_PHYSICS("block_physics"),
+    BLOCK_PHYSICS("block_physics", List.of()),
 
     /**
      * Allows or denies hunger loss.
      */
-    HUNGER("hunger"),
+    HUNGER("hunger", List.of()),
 
     /**
      * Allows or denies weather changes.
      */
-    WEATHER_CHANGE("weather_change"),
+    WEATHER_CHANGE("weather_change", List.of()),
 
     /**
      * Allows or denies command execution.
      */
-    COMMAND_EXECUTE("command_execute"),
+    COMMAND_EXECUTE("command_execute", List.of()),
 
     /**
      * Allows or denies item usage (e.g., right-click actions).
      */
-    ITEM_USE("item_use"),
+    ITEM_USE("item_use", List.of()),
 
     /**
      * Allows or denies entity damage.
      */
-    ENTITY_DAMAGE("entity_damage"),
+    ENTITY_DAMAGE("entity_damage", List.of()),
 
     /**
      * Allows or denies entity spawning.
      */
-    ENTITY_SPAWN("entity_spawn"),
+    ENTITY_SPAWN("entity_spawn", List.of()),
 
     /**
      * Allows or denies monster damage.
      */
-    MONSTER_DAMAGE("monster_damage"),
+    MONSTER_DAMAGE("monster_damage", List.of()),
 
     /**
      * Allows or denies monster spawning.
      */
-    MONSTER_SPAWN("monster_spawn"),
+    MONSTER_SPAWN("monster_spawn", List.of()),
 
     /**
      * Allows or denies animal damage.
      */
-    ANIMAL_DAMAGE("animal_damage"),
+    ANIMAL_DAMAGE("animal_damage", List.of()),
 
     /**
      * Allows or denies animal spawning.
      */
-    ANIMAL_SPAWN("animal_spawn"),
+    ANIMAL_SPAWN("animal_spawn", List.of()),
 
     /**
      * Allows or denies flying.
      */
-    FLY("fly"),
+    FLY("fly", List.of()),
 
     /**
      * Allows or denies entering portals.
      */
-    PORTAL_ENTER("portal_enter");
+    PORTAL_ENTER("portal_enter", List.of());
 
     /**
      * Gets the GuardFlag enum constant by its name.
@@ -215,15 +218,30 @@ public enum GuardFlag {
         return null; // Not found
     }
 
+    /**
+     * Gets the list of globally valid values for the flag.
+     *
+     * @return The list of globally valid values for the flag.
+     */
+    public static List<String> getDefaultValidValues() {
+        return List.of("empty", "true", "false", "allow", "deny");
+    }
+
     private final String flagName;
+    private final List<String> validValues;
 
     /**
      * Constructs a GuardFlag enum constant with the specified flag name.
      *
-     * @param flagName The name of the flag.
+     * @param flagName    The name of the flag.
+     * @param validValues
      */
-    GuardFlag(String flagName) {
+    GuardFlag(String flagName, List<String> validValues) {
         this.flagName = flagName;
+        List<String> valid = new ArrayList();
+        valid.addAll(validValues);
+        valid.addAll(getDefaultValidValues());
+        this.validValues = valid;
     }
 
     /**
@@ -233,6 +251,15 @@ public enum GuardFlag {
      */
     public String getFlagName() {
         return flagName;
+    }
+
+    /**
+     * Gets the list of valid values for the flag.
+     *
+     * @return The list of valid values for the flag.
+     */
+    public List<String> getValidValues() {
+        return validValues;
     }
 
 }
