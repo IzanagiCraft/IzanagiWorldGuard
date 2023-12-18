@@ -97,12 +97,6 @@ public class StringUtils {
      * @return Formatted string.
      */
     public String fastFormat(String format, Map<String, Object> values) {
-        // Create a copy of the default replacements to avoid modifying the original map
-        Map<String, Object> replacements = new HashMap<>(values);
-
-        // Add values to the replacements map, but only for keys that do not already exist
-        values.forEach((key, value) -> replacements.putIfAbsent(key, value));
-
         // Create a StringBuilder to modify the format string
         StringBuilder formatter = new StringBuilder(format);
 
