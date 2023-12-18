@@ -60,37 +60,145 @@ package com.izanagicraft.guard.flags;
  * @since 17.12.2023
  */
 public enum GuardFlag {
-    BUILD("build"),                    // Allows or denies building
-    BREAK("break"),                    // Allows or denies block breaking
-    PLACE("place"),                    // Allows or denies block placement
-    INTERACT("interact"),              // Allows or denies interaction with blocks/entities
-    PVP("pvp"),                        // Allows or denies player versus player combat
-    MOB_SPAWNING("mob_spawning"),      // Allows or denies mob spawning
-    EXPLOSIONS("explosions"),          // Allows or denies explosions
-    FIRE_SPREAD("fire_spread"),        // Allows or denies fire spread
-    ENTRY("entry"),                    // Allows or denies entry into the region
-    EXIT("exit"),                      // Allows or denies exit from the region
-    TELEPORT("teleport"),              // Allows or denies teleportation
-    DAMAGE("damage"),                  // Allows or denies damage to entities
-    HEAL("heal"),                      // Allows or denies healing entities
-    ITEM_DROP("item_drop"),            // Allows or denies dropping items
-    ITEM_PICKUP("item_pickup"),        // Allows or denies picking up items
-    BLOCK_PHYSICS("block_physics"),    // Allows or denies block physics (e.g., sand falling)
-    HUNGER("hunger"),                  // Allows or denies hunger loss
-    WEATHER_CHANGE("weather_change"),  // Allows or denies weather changes
-    COMMAND_EXECUTE("command_execute"),// Allows or denies command execution
-    ITEM_USE("item_use"),              // Allows or denies item usage (e.g., right-click actions)
-    ENTITY_DAMAGE("entity_damage"),    // Allows or denies entity damage
-    ENTITY_SPAWN("entity_spawn"),      // Allows or denies entity spawning
-    MONSTER_DAMAGE("monster_damage"),  // Allows or denies monster damage
-    MONSTER_SPAWN("monster_spawn"),    // Allows or denies monster spawning
-    ANIMAL_DAMAGE("animal_damage"),    // Allows or denies animal damage
-    ANIMAL_SPAWN("animal_spawn"),      // Allows or denies animal spawning
-    FLY("fly"),                        // Allows or denies flying
-    PORTAL_ENTER("portal_enter")       // Allows or denies entering portals
+    /**
+     * Allows or denies building.
+     */
+    BUILD("build"),
 
-    //;
-    ;
+    /**
+     * Allows or denies block breaking.
+     */
+    BREAK("break"),
+
+    /**
+     * Allows or denies block placement.
+     */
+    PLACE("place"),
+
+    /**
+     * Allows or denies interaction with blocks/entities.
+     */
+    INTERACT("interact"),
+
+    /**
+     * Allows or denies player versus player combat.
+     */
+    PVP("pvp"),
+
+    /**
+     * Allows or denies mob spawning.
+     */
+    MOB_SPAWNING("mob_spawning"),
+
+    /**
+     * Allows or denies explosions.
+     */
+    EXPLOSIONS("explosions"),
+
+    /**
+     * Allows or denies fire spread.
+     */
+    FIRE_SPREAD("fire_spread"),
+
+    /**
+     * Allows or denies entry into the region.
+     */
+    ENTRY("entry"),
+
+    /**
+     * Allows or denies exit from the region.
+     */
+    EXIT("exit"),
+
+    /**
+     * Allows or denies teleportation.
+     */
+    TELEPORT("teleport"),
+
+    /**
+     * Allows or denies damage to entities.
+     */
+    DAMAGE("damage"),
+
+    /**
+     * Allows or denies healing entities.
+     */
+    HEAL("heal"),
+
+    /**
+     * Allows or denies dropping items.
+     */
+    ITEM_DROP("item_drop"),
+
+    /**
+     * Allows or denies picking up items.
+     */
+    ITEM_PICKUP("item_pickup"),
+
+    /**
+     * Allows or denies block physics (e.g., sand falling).
+     */
+    BLOCK_PHYSICS("block_physics"),
+
+    /**
+     * Allows or denies hunger loss.
+     */
+    HUNGER("hunger"),
+
+    /**
+     * Allows or denies weather changes.
+     */
+    WEATHER_CHANGE("weather_change"),
+
+    /**
+     * Allows or denies command execution.
+     */
+    COMMAND_EXECUTE("command_execute"),
+
+    /**
+     * Allows or denies item usage (e.g., right-click actions).
+     */
+    ITEM_USE("item_use"),
+
+    /**
+     * Allows or denies entity damage.
+     */
+    ENTITY_DAMAGE("entity_damage"),
+
+    /**
+     * Allows or denies entity spawning.
+     */
+    ENTITY_SPAWN("entity_spawn"),
+
+    /**
+     * Allows or denies monster damage.
+     */
+    MONSTER_DAMAGE("monster_damage"),
+
+    /**
+     * Allows or denies monster spawning.
+     */
+    MONSTER_SPAWN("monster_spawn"),
+
+    /**
+     * Allows or denies animal damage.
+     */
+    ANIMAL_DAMAGE("animal_damage"),
+
+    /**
+     * Allows or denies animal spawning.
+     */
+    ANIMAL_SPAWN("animal_spawn"),
+
+    /**
+     * Allows or denies flying.
+     */
+    FLY("fly"),
+
+    /**
+     * Allows or denies entering portals.
+     */
+    PORTAL_ENTER("portal_enter");
 
     /**
      * Gets the GuardFlag enum constant by its name.
