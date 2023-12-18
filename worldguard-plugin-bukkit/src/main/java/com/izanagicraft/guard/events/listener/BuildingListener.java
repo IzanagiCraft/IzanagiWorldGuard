@@ -99,7 +99,7 @@ public class BuildingListener extends GuardListener {
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
         if (worldConfig == null) return;
 
-        boolean allowBuild = false;
+        boolean allowBuild = true;
 
         String build = worldConfig.getString("flags." + GuardFlag.BUILD.getFlagName(), "false");
         if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("deny")) {
@@ -144,7 +144,7 @@ public class BuildingListener extends GuardListener {
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
         if (worldConfig == null) return;
 
-        boolean allowBuild = false;
+        boolean allowBuild = true;
 
         String build = worldConfig.getString("flags." + GuardFlag.BUILD.getFlagName(), "false");
         if (build.isEmpty() || build.equals("empty") || build.equals("false") || build.equals("deny")) {
