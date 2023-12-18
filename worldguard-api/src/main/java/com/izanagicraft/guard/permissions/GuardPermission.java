@@ -64,6 +64,18 @@ public enum GuardPermission {
      * Permission for the admin group.
      */
     GROUPS_ADMIN("admin"),
+    /**
+     * Permission for the debug group.
+     * Receives additional debug information
+     */
+    GROUPS_DEBUG("debug"),
+
+    // command permissions
+
+    /**
+     * Permission to execute the world guard command
+     */
+    COMMAND_WORLDGUARD("guard.command.worldguard"),
 
     // Player-specific ignore permissions for flags
     /**

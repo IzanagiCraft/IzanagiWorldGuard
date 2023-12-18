@@ -50,7 +50,8 @@ import com.izanagicraft.guard.GuardConstants;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.command.CommandSender;
 
-import java.util.Collection;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 /**
  * IzanagiWorldGuard; com.izanagicraft.guard.utils:MessageUtils
@@ -130,6 +131,24 @@ public class MessageUtils {
     public static void sendWrappedMessage(CommandSender sender, String... lines) {
         sendMessage(sender, "\n" + GuardConstants.CHAT_COLOR +
                 String.join("\n" + GuardConstants.CHAT_COLOR, lines));
+    }
+
+    /**
+     * Sends an error message to a CommandSender with the information from a Throwable.
+     *
+     * @param sender    The CommandSender to receive the error message.
+     * @param throwable The Throwable containing the error information.
+     */
+    public static void sendErrorMessage(CommandSender sender, Throwable throwable) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        throwable.printStackTrace(pw);
+        String stackTrace = sw.toString();
+
+        String errorMessage = GuardConstants.CHAT_PREFIX +
+                "&cAn unhandled error occurred: " + throwable.getMessage() + "\n\n" + stackTrace;
+
+        sendMessage(sender, errorMessage);
     }
 
 }

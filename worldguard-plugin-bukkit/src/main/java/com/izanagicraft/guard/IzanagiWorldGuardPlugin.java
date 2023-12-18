@@ -47,6 +47,7 @@
 package com.izanagicraft.guard;
 
 import com.izanagicraft.guard.commands.GuardCommand;
+import com.izanagicraft.guard.commands.WorldGuardCommand;
 import com.izanagicraft.guard.events.listener.DisableMessageBroadcast;
 import com.izanagicraft.guard.events.listener.WorldLoadEventListener;
 import com.izanagicraft.guard.utils.MessageUtils;
@@ -110,7 +111,13 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.loadConfigurations();
+        try {
+            this.loadConfigurations();
+        } catch (IOException e) {
+            MessageUtils.sendPrefixedMessage(Bukkit.getConsoleSender(), "&cGuard cannot be enabled... Cannot load configs....");
+            e.printStackTrace();
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
         this.prepare();
         this.loadProviders();
         this.loadCommands();
@@ -145,15 +152,17 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
     /**
      * Loads plugin configurations, including default configurations and reloads existing ones.
      */
-    private void loadConfigurations() {
+    private void loadConfigurations() throws IOException {
         this.saveDefaultConfig();
         this.reloadConfigurations();
     }
 
     /**
      * Reloads plugin configurations, including the main configuration file.
+     *
+     * @throws IOException if the configs could not been reloaded.
      */
-    public void reloadConfigurations() {
+    public void reloadConfigurations() throws IOException {
         this.reloadConfig();
     }
 
@@ -184,7 +193,7 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
     private void loadCommands() {
         CommandMap commandMap = Bukkit.getCommandMap();
         List.of(
-                // TODO: add all commands
+                new WorldGuardCommand(this)
         ).forEach(command -> commandMap.register("guard", (GuardCommand) command));
     }
 

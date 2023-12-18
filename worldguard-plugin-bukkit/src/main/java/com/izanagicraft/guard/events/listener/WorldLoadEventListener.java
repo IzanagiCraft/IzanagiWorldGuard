@@ -144,7 +144,7 @@ public class WorldLoadEventListener extends GuardListener {
     private void populateWorldConfig(World world, YamlConfiguration config) {
         ConfigurationSection defaultFlagSection = getPlugin().getConfig().getConfigurationSection("defaultFlags");
         defaultFlagSection.getKeys(false).forEach(defaultFlag -> {
-            config.set("flags." + defaultFlag, defaultFlagSection.getString("defaultFlags." + defaultFlag, "empty"));
+            config.set("flags." + defaultFlag, getPlugin().getConfig().getString("defaultFlags." + defaultFlag, "empty"));
         });
     }
 
