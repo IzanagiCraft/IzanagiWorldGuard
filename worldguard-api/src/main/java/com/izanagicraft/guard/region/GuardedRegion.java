@@ -46,13 +46,10 @@
 
 package com.izanagicraft.guard.region;
 
-import com.izanagicraft.guard.flags.GuardFlag;
 import com.izanagicraft.guard.utils.SelectionUtils;
 import com.sk89q.worldedit.regions.Region;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import java.util.Collection;
 
 /**
  * IzanagiWorldGuard; com.izanagicraft.guard.region:GuardedRegion
@@ -84,21 +81,6 @@ public interface GuardedRegion {
      * @return The maximum point.
      */
     Location getMaxPoint();
-
-
-    /**
-     * Gets the flag container containing all enabled in this region.
-     *
-     * @return The FlagContainer containing enabled flags
-     */
-    GuardFlag.FlagContainer getFlagContainer();
-
-    /**
-     * Gets the flags enabled in this region.
-     *
-     * @return The enabled flags
-     */
-    Collection<GuardFlag> readFlags();
 
     /**
      * Creates a new GuardedRegion instance with the specified parameters.
