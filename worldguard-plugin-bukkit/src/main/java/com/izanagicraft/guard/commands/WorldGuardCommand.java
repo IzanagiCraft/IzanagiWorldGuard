@@ -52,9 +52,11 @@ import com.izanagicraft.guard.permissions.GuardPermission;
 import com.izanagicraft.guard.utils.MessageUtils;
 import com.izanagicraft.guard.utils.StringUtils;
 import org.bukkit.command.Command;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * IzanagiWorldGuard; com.izanagicraft.guard.commands:WorldGuardCommand
@@ -117,13 +119,45 @@ public class WorldGuardCommand extends GuardCommand {
                     MessageUtils.sendPrefixedMessage(source, "&cYou can only run this command as a player.");
                     return;
                 }
-                MessageUtils.sendPrefixedMessage(source, "&cNot implemented yet.");
+
+                if (argCount == 3) {
+                    GuardFlag choice = GuardFlag.getByName(args[1]);
+                    if (choice == null) {
+                        break;
+                    }
+
+                    YamlConfiguration config = plugin.getWorldConfigs().get(source.getPlayer().getWorld().getName());
+
+                    if (config == null) {
+                        MessageUtils.sendPrefixedMessage(source, "&cYour current world is not under protection. &aYou can remove it in the WorldGuard config.yml in section 'ignored' to protect it properly.");
+                        return;
+                    }
+
+                    String newValue = args[2].toLowerCase();
+                    if (!choice.getValidValues().contains(newValue)) {
+                        MessageUtils.sendPrefixedMessage(source, "&cUnsupported Value: &e" + newValue);
+                        MessageUtils.sendPrefixedMessage(source, "&aChoose one of: &e" + String.join(", ", choice.getValidValues()));
+                        return;
+                    }
+
+                    config.set("flags." + choice.getFlagName(), newValue);
+
+                    MessageUtils.sendPrefixedMessage(source, StringUtils.fastFormat(
+                            "&aSuccessfully &7set flag [&e${flag}&7] for region [&7${region}&7] to [&9${newValue}&7].",
+                            Map.of(
+                                    "flag", choice.getFlagName(),
+                                    "newValue", newValue,
+                                    "region", "__global__"
+                            )
+                    ));
+                    return;
+                }
                 break;
             default:
-                MessageUtils.sendPrefixedMessage(source, this.getUsage());
-                return;
+                break;
         }
 
+        MessageUtils.sendPrefixedMessage(source, this.getUsage());
     }
 
     @Override

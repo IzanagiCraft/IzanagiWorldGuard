@@ -96,7 +96,7 @@ public class StringUtils {
      * @param values Values to replace placeholders.
      * @return Formatted string.
      */
-    public String fastFormat(String format, Map<String, Object> values) {
+    public static String fastFormat(String format, Map<String, Object> values) {
         // Create a StringBuilder to modify the format string
         StringBuilder formatter = new StringBuilder(format);
 
