@@ -60,26 +60,81 @@ package com.izanagicraft.guard.permissions;
 public enum GuardPermission {
 
     // group specific permissions
+    /**
+     * Permission for the admin group.
+     */
     GROUPS_ADMIN("admin"),
-    // ========================================= //
 
     // Player-specific ignore permissions for flags
+    /**
+     * Ignore permission for the BUILD flag.
+     */
     PLAYER_BUILD("guard.flag.ignored.build"),
+
+    /**
+     * Ignore permission for the BREAK flag.
+     */
     PLAYER_BREAK("guard.flag.ignored.break"),
+
+    /**
+     * Ignore permission for the PLACE flag.
+     */
     PLAYER_PLACE("guard.flag.ignored.place"),
+
+    /**
+     * Ignore permission for the INTERACT flag.
+     */
     PLAYER_INTERACT("guard.flag.ignored.interact"),
+
+    /**
+     * Ignore permission for the PVP flag.
+     */
     PLAYER_PVP("guard.flag.ignored.pvp"),
+
+    /**
+     * Ignore permission for the ENTRY flag.
+     */
     PLAYER_ENTRY("guard.flag.ignored.entry"),
+
+    /**
+     * Ignore permission for the EXIT flag.
+     */
     PLAYER_EXIT("guard.flag.ignored.exit"),
+
+    /**
+     * Ignore permission for the TELEPORT flag.
+     */
     PLAYER_TELEPORT("guard.flag.ignored.teleport"),
+
+    /**
+     * Ignore permission for the DAMAGE flag.
+     */
     PLAYER_DAMAGE("guard.flag.ignored.damage"),
+
+    /**
+     * Ignore permission for the ITEM_DROP flag.
+     */
     PLAYER_ITEM_DROP("guard.flag.ignored.item_drop"),
+
+    /**
+     * Ignore permission for the ITEM_PICKUP flag.
+     */
     PLAYER_ITEM_PICKUP("guard.flag.ignored.item_pickup"),
+
+    /**
+     * Ignore permission for the COMMAND_EXECUTE flag.
+     */
     PLAYER_COMMAND_EXECUTE("guard.flag.ignored.command_execute"),
+
+    /**
+     * Ignore permission for the ITEM_USE flag.
+     */
     PLAYER_ITEM_USE("guard.flag.ignored.item_use"),
 
-    // ========================================= //
     // default permission
+    /**
+     * Default permission for general use.
+     */
     DEFAULT("default");
 
     /**
