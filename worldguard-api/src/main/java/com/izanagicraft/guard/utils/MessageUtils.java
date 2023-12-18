@@ -132,33 +132,4 @@ public class MessageUtils {
                 String.join("\n" + GuardConstants.CHAT_COLOR, lines));
     }
 
-    /**
-     * Checks if a string starts with another string, ignoring case.
-     *
-     * @param string The input string.
-     * @param prefix The prefix to check for.
-     * @return True if the input string starts with the specified prefix, ignoring case; otherwise, false.
-     */
-    public static boolean startsWithIgnoreCase(String string, String prefix) {
-        if (string.length() < prefix.length()) {
-            return false;
-        }
-        return string.regionMatches(true, 0, prefix, 0, prefix.length());
-    }
-
-    /**
-     * Copies partial matches of a prefix from available strings to a collection.
-     *
-     * @param input     The input prefix.
-     * @param available The collection of available strings.
-     * @param toAppend  The collection to append matching strings.
-     */
-    public static void copyPartialMatches(String input, Collection<String> available, Collection<String> toAppend) {
-        for (String string : available) {
-            if (startsWithIgnoreCase(string, input)) {
-                toAppend.add(string);
-            }
-        }
-    }
-
 }
