@@ -60,11 +60,18 @@ import java.io.IOException;
 
 /**
  * IzanagiWorldGuard; com.izanagicraft.guard.events.listener:WorldLoadEventListener
+ * <p>
+ * Event listener for world-related events in the IzanagiWorldGuard plugin.
+ * <p>
+ * This class extends the {@link GuardListener} class and handles events related to world loading and unloading.
+ * It manages the loading of world configurations, including the creation of global configurations for new worlds,
+ * and the saving of world configurations upon world unloading.
  *
  * @author <a href="https://github.com/sanguine6660">@sanguine6660</a>
  * @since 17.12.2023
  */
 public class WorldLoadEventListener extends GuardListener {
+
     /**
      * Constructs a new GuardListener with the specified IzanagiWorldGuardPlugin.
      *
@@ -74,6 +81,11 @@ public class WorldLoadEventListener extends GuardListener {
         super(plugin);
     }
 
+    /**
+     * Handles the WorldLoadEvent by asynchronously loading the configuration for the world.
+     *
+     * @param event The WorldLoadEvent.
+     */
     @EventHandler
     public void onWorldLoad(WorldLoadEvent event) {
         getPlugin().getExecutor().submit(() -> {
@@ -100,6 +112,11 @@ public class WorldLoadEventListener extends GuardListener {
         });
     }
 
+    /**
+     * Handles the WorldUnloadEvent by asynchronously saving the configuration for the world.
+     *
+     * @param event The WorldUnloadEvent.
+     */
     @EventHandler
     public void onWorldUnLoad(WorldUnloadEvent event) {
         getPlugin().getExecutor().submit(() -> {
@@ -118,6 +135,12 @@ public class WorldLoadEventListener extends GuardListener {
         });
     }
 
+    /**
+     * Populates the world configuration with default flags from the plugin's main configuration.
+     *
+     * @param world  The world for which the configuration is being populated.
+     * @param config The YamlConfiguration to be populated.
+     */
     private void populateWorldConfig(World world, YamlConfiguration config) {
         ConfigurationSection defaultFlagSection = getPlugin().getConfig().getConfigurationSection("defaultFlags");
         defaultFlagSection.getKeys(false).forEach(defaultFlag -> {
