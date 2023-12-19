@@ -52,6 +52,8 @@ import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
 import com.izanagicraft.guard.utils.MessageUtils;
 import io.papermc.paper.event.player.PlayerPickItemEvent;
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Item;
@@ -123,6 +125,7 @@ public class InventoryItemChangeListener extends GuardListener {
             player.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                     GuardConstants.CHAT_PREFIX + "&cYou're not allowed to drop items here. &e(TODO translation)"
             ));
+            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> player.sendActionBar(Component.empty()), 20*2);
         }
 
     }
@@ -171,6 +174,7 @@ public class InventoryItemChangeListener extends GuardListener {
             player.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                     GuardConstants.CHAT_PREFIX + "&cYou're not allowed to pickup items here. &e(TODO translation)"
             ));
+            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> player.sendActionBar(Component.empty()), 20*2);
         }
 
     }

@@ -51,6 +51,7 @@ import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
 import com.izanagicraft.guard.utils.MessageUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -114,6 +115,7 @@ public class PlayerFlyListener extends GuardListener {
                             online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                                     GuardConstants.CHAT_PREFIX + "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground. &e(TODO translation)"
                             ));
+                            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> online.sendActionBar(Component.empty()), 20*2);
 
                             // System.out.println("spawning fall task run for " + online.getName());
                             Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
@@ -128,6 +130,7 @@ public class PlayerFlyListener extends GuardListener {
                                 online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                                         GuardConstants.CHAT_PREFIX + "&cFly was disabled. &e(TODO translation)"
                                 ));
+                                Bukkit.getScheduler().runTaskLater(getPlugin(), () -> online.sendActionBar(Component.empty()), 20*2);
                                 spawnedFallTask.remove(online.getUniqueId());
                             }, 20 * 10);
                         } else {
@@ -135,6 +138,7 @@ public class PlayerFlyListener extends GuardListener {
                             online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                                     GuardConstants.CHAT_PREFIX + "&cYou're not allowed to fly anymore. &e(TODO translation)"
                             ));
+                            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> online.sendActionBar(Component.empty()), 20*2);
                             spawnedFallTask.remove(online.getUniqueId());
                         }
                     } else {

@@ -173,7 +173,7 @@ public class BuildingListener extends GuardListener {
     }
 
     private void spawnDenyParticle(Player player, Location location) {
-        player.spawnParticle(Particle.VILLAGER_ANGRY, location, 1, 0.5, 0, 0.5, 0);
+        player.spawnParticle(Particle.SMOKE_NORMAL, location, 1, 0.5, 0, 0.5, 0);
     }
 
 }
