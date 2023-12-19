@@ -92,6 +92,8 @@ public class BlockPhysicsListener extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = block.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -126,6 +128,8 @@ public class BlockPhysicsListener extends GuardListener {
             event.setCancelled(true);
             return;
         }
+
+        if(event.isCancelled()) return;
 
         Location target = block.getLocation();
         Location target2 = block2.getLocation();
@@ -162,6 +166,8 @@ public class BlockPhysicsListener extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = block.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -196,6 +202,8 @@ public class BlockPhysicsListener extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = entity.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -228,6 +236,8 @@ public class BlockPhysicsListener extends GuardListener {
             event.setCancelled(true);
             return;
         }
+
+        if(event.isCancelled()) return;
 
         Location target = block.getLocation();
 

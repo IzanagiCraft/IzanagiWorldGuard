@@ -90,6 +90,8 @@ public class EntityStatsChangeListener extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = entity.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -124,6 +126,8 @@ public class EntityStatsChangeListener extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = entity.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -157,6 +161,8 @@ public class EntityStatsChangeListener extends GuardListener {
             event.setCancelled(true);
             return;
         }
+
+        if(event.isCancelled()) return;
 
         Location target = entity.getLocation();
 

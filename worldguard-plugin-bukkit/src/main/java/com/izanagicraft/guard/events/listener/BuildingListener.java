@@ -94,6 +94,8 @@ public class BuildingListener extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = block.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -138,6 +140,8 @@ public class BuildingListener extends GuardListener {
             event.setCancelled(true);
             return;
         }
+
+        if(event.isCancelled()) return;
 
         Location target = block.getLocation();
 

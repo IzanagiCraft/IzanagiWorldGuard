@@ -94,6 +94,8 @@ public class InventoryItemChangeListener extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = item.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -139,6 +141,8 @@ public class InventoryItemChangeListener extends GuardListener {
             event.setCancelled(true);
             return;
         }
+
+        if(event.isCancelled()) return;
 
         Location target = item.getLocation();
 

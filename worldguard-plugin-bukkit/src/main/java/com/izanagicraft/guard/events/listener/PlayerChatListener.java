@@ -86,6 +86,8 @@ public class PlayerChatListener  extends GuardListener {
             return;
         }
 
+        if(event.isCancelled()) return;
+
         Location target = player.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -121,6 +123,8 @@ public class PlayerChatListener  extends GuardListener {
             event.setCancelled(true);
             return;
         }
+
+        if(event.isCancelled()) return;
 
         Location target = player.getLocation();
 
