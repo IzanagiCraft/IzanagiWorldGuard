@@ -103,34 +103,48 @@ public class PlayerFlyListener extends GuardListener {
 
                 // TODO: region based checks.
 
-                boolean flyMode = (online.getGameMode().equals(GameMode.SPECTATOR) || online.getGameMode().equals(GameMode.CREATIVE));
+                if (online.getGameMode().equals(GameMode.SPECTATOR) || online.getGameMode().equals(GameMode.CREATIVE)) return;
 
-                if (!flyMode && online.getAllowFlight() != allowFly && !allowFly) {
-                    Bukkit.getScheduler().runTask(getPlugin(), () -> {
-                        if (spawnedFallTask.getOrDefault(online.getUniqueId(), false)) return;
-                        spawnedFallTask.put(online.getUniqueId(), true);
-                        MessageUtils.sendPrefixedMessage(online, "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground. &e(TODO translation)");
-                        online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
-                                GuardConstants.CHAT_PREFIX + "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground. &e(TODO translation)"
-                        ));
-                        Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
+                Bukkit.getScheduler().runTask(getPlugin(), () -> {
+                    if (!allowFly) {
+                        if (online.isFlying()) {
                             if (spawnedFallTask.getOrDefault(online.getUniqueId(), false)) return;
-                            online.setAllowFlight(false);
-                            online.setFlying(false);
-                            spawnedFallTask.remove(online.getUniqueId());
-                        }, 20 * 10);
-                    });
-                }
+                            spawnedFallTask.put(online.getUniqueId(), true);
+                            MessageUtils.sendPrefixedMessage(online, "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground. &e(TODO translation)");
+                            online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
+                                    GuardConstants.CHAT_PREFIX + "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground. &e(TODO translation)"
+                            ));
 
-                if (!flyMode && online.getAllowFlight() != allowFly && allowFly) {
-                    Bukkit.getScheduler().runTask(getPlugin(), () -> {
+                            // System.out.println("spawning fall task run for " + online.getName());
+                            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
+                                // System.out.println("fall task run for " + online.getName());
+                                if (!spawnedFallTask.getOrDefault(online.getUniqueId(), false)
+                                    || online.getGameMode().equals(GameMode.SPECTATOR) || online.getGameMode().equals(GameMode.CREATIVE)) {
+                                    // System.out.println("cancel fall task run for " + online.getName());
+                                    return;
+                                }
+                                online.setAllowFlight(false);
+                                online.setFlying(false);
+                                online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
+                                        GuardConstants.CHAT_PREFIX + "&cFly was disabled. &e(TODO translation)"
+                                ));
+                                spawnedFallTask.remove(online.getUniqueId());
+                            }, 20 * 10);
+                        } else {
+                            online.setAllowFlight(false);
+                            online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
+                                    GuardConstants.CHAT_PREFIX + "&cYou're not allowed to fly anymore. &e(TODO translation)"
+                            ));
+                            spawnedFallTask.remove(online.getUniqueId());
+                        }
+                    } else {
                         online.setAllowFlight(true);
                         spawnedFallTask.remove(online.getUniqueId());
                         online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                                 GuardConstants.CHAT_PREFIX + "&aYou're allowed to fly now. &e(TODO translation)"
                         ));
-                    });
-                }
+                    }
+                });
 
             });
         }, 1, 2, TimeUnit.SECONDS);
