@@ -105,7 +105,7 @@ public class PlayerFlyListener extends GuardListener {
 
                 boolean flyMode = (online.getGameMode().equals(GameMode.SPECTATOR) || online.getGameMode().equals(GameMode.CREATIVE));
 
-                if (!flyMode && online.getAllowFlight() && !allowFly) {
+                if (!flyMode && online.getAllowFlight() != allowFly && !allowFly) {
                     Bukkit.getScheduler().runTask(getPlugin(), () -> {
                         online.setAllowFlight(false);
                         MessageUtils.sendPrefixedMessage(online, "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground.");
@@ -126,7 +126,7 @@ public class PlayerFlyListener extends GuardListener {
                     });
                 }
 
-                if (!flyMode && !online.getAllowFlight() && allowFly) {
+                if (!flyMode && online.getAllowFlight() != allowFly && allowFly) {
                     Bukkit.getScheduler().runTask(getPlugin(), () -> {
                         online.setAllowFlight(true);
                         online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
