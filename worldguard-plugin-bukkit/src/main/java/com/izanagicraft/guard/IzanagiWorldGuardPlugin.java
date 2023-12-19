@@ -212,7 +212,8 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
                 new PvPListener(this),
                 new PvEListener(this),
                 new EntitySpawnListener(this),
-                new PlayerFlyListener(this)
+                new PlayerFlyListener(this),
+                new PlayerJoinListener(this)
         ).forEach(listener -> pluginManager.registerEvents(listener, this));
     }
 

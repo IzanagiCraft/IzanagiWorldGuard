@@ -48,6 +48,7 @@ package com.izanagicraft.guard.events.listener;
 
 import com.izanagicraft.guard.GuardConstants;
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
+import com.izanagicraft.guard.commands.BuildModeCommand;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
 import com.izanagicraft.guard.permissions.GuardPermission;
@@ -97,12 +98,14 @@ public class InventoryItemChangeListener extends GuardListener {
             return;
         }
 
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) return;
 
         if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
                 || player.hasPermission(GuardPermission.PLAYER_ITEM_DROP.getName())) {
             return;
         }
+
+        if (BuildModeCommand.isBuildMode(player)) return;
 
         Location target = item.getLocation();
 
@@ -131,7 +134,7 @@ public class InventoryItemChangeListener extends GuardListener {
             player.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                     GuardConstants.CHAT_PREFIX + "&cYou're not allowed to drop items here. &e(TODO translation)"
             ));
-            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> player.sendActionBar(Component.empty()), 20*2);
+            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> player.sendActionBar(Component.empty()), 20 * 2);
         }
 
     }
@@ -151,12 +154,14 @@ public class InventoryItemChangeListener extends GuardListener {
             return;
         }
 
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) return;
 
         if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
                 || player.hasPermission(GuardPermission.PLAYER_ITEM_PICKUP.getName())) {
             return;
         }
+
+        if (BuildModeCommand.isBuildMode(player)) return;
 
         Location target = item.getLocation();
 
@@ -185,7 +190,7 @@ public class InventoryItemChangeListener extends GuardListener {
             player.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                     GuardConstants.CHAT_PREFIX + "&cYou're not allowed to pickup items here. &e(TODO translation)"
             ));
-            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> player.sendActionBar(Component.empty()), 20*2);
+            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> player.sendActionBar(Component.empty()), 20 * 2);
         }
 
     }

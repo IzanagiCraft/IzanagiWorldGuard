@@ -47,6 +47,7 @@
 package com.izanagicraft.guard.events.listener;
 
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
+import com.izanagicraft.guard.commands.BuildModeCommand;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
 import com.izanagicraft.guard.permissions.GuardPermission;
@@ -95,13 +96,15 @@ public class BuildingListener extends GuardListener {
             return;
         }
 
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) return;
 
         if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
                 || player.hasPermission(GuardPermission.PLAYER_PLACE.getName())
                 || player.hasPermission(GuardPermission.PLAYER_BUILD.getName())) {
             return;
         }
+
+        if (BuildModeCommand.isBuildMode(player)) return;
 
         Location target = block.getLocation();
 
@@ -148,13 +151,15 @@ public class BuildingListener extends GuardListener {
             return;
         }
 
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) return;
 
         if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
                 || player.hasPermission(GuardPermission.PLAYER_BREAK.getName())
                 || player.hasPermission(GuardPermission.PLAYER_BUILD.getName())) {
             return;
         }
+
+        if (BuildModeCommand.isBuildMode(player)) return;
 
         Location target = block.getLocation();
 
@@ -184,9 +189,8 @@ public class BuildingListener extends GuardListener {
             spawnDenyParticle(player, target.add(new Vector(0, 1, 0)));
         }
     }
-
     private void spawnDenyParticle(Player player, Location location) {
-        player.spawnParticle(Particle.SMOKE_NORMAL, location, 1, 0.5, 0, 0.5, 0);
+        player.spawnParticle(Particle.SMOKE_LARGE, location, 1, 0.5, 0, 0.5, 0);
     }
 
 }
