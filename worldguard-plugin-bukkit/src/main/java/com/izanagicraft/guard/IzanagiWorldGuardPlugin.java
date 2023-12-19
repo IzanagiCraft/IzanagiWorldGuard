@@ -46,6 +46,7 @@
 
 package com.izanagicraft.guard;
 
+import com.izanagicraft.guard.commands.BuildModeCommand;
 import com.izanagicraft.guard.commands.GuardCommand;
 import com.izanagicraft.guard.commands.WorldGuardCommand;
 import com.izanagicraft.guard.events.listener.*;
@@ -192,7 +193,8 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
     private void loadCommands() {
         CommandMap commandMap = Bukkit.getCommandMap();
         List.of(
-                new WorldGuardCommand(this)
+                new WorldGuardCommand(this),
+                new BuildModeCommand(this)
         ).forEach(command -> commandMap.register("guard", (GuardCommand) command));
     }
 
