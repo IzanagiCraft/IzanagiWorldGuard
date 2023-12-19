@@ -49,6 +49,7 @@ package com.izanagicraft.guard.events.listener;
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
+import com.izanagicraft.guard.permissions.GuardPermission;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
@@ -96,6 +97,12 @@ public class BuildingListener extends GuardListener {
 
         if(event.isCancelled()) return;
 
+        if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
+                || player.hasPermission(GuardPermission.PLAYER_PLACE.getName())
+                || player.hasPermission(GuardPermission.PLAYER_BUILD.getName())) {
+            return;
+        }
+
         Location target = block.getLocation();
 
         YamlConfiguration worldConfig = getPlugin().getWorldConfigs().get(target.getWorld().getName());
@@ -142,6 +149,12 @@ public class BuildingListener extends GuardListener {
         }
 
         if(event.isCancelled()) return;
+
+        if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
+                || player.hasPermission(GuardPermission.PLAYER_BREAK.getName())
+                || player.hasPermission(GuardPermission.PLAYER_BUILD.getName())) {
+            return;
+        }
 
         Location target = block.getLocation();
 

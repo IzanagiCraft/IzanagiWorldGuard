@@ -50,6 +50,7 @@ import com.izanagicraft.guard.GuardConstants;
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
+import com.izanagicraft.guard.permissions.GuardPermission;
 import com.izanagicraft.guard.utils.MessageUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -87,6 +88,9 @@ public class PlayerFlyListener extends GuardListener {
 
         getPlugin().getScheduler().scheduleAtFixedRate(() -> {
             getPlugin().getServer().getOnlinePlayers().forEach(online -> {
+                if (online.hasPermission(GuardPermission.GROUPS_ADMIN.getName())) {
+                    return;
+                }
 
                 Location target = online.getLocation();
 

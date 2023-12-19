@@ -50,6 +50,7 @@ import com.izanagicraft.guard.GuardConstants;
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
+import com.izanagicraft.guard.permissions.GuardPermission;
 import com.izanagicraft.guard.utils.MessageUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -98,6 +99,11 @@ public class PvPListener extends GuardListener {
 
         if (event.isCancelled()) return;
 
+        if (attacker.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
+                || attacker.hasPermission(GuardPermission.PLAYER_PVP.getName())) {
+            return;
+        }
+
         Location target = entity.getLocation();
         Location target2 = entity.getLocation();
 
@@ -123,7 +129,7 @@ public class PvPListener extends GuardListener {
             attackerPlayer.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                     GuardConstants.CHAT_PREFIX + "&cYou're not allowed to PVP here. &e(TODO translation)"
             ));
-            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> attackerPlayer.sendActionBar(Component.empty()), 20*2);
+            Bukkit.getScheduler().runTaskLater(getPlugin(), () -> attackerPlayer.sendActionBar(Component.empty()), 20 * 2);
         }
     }
 }

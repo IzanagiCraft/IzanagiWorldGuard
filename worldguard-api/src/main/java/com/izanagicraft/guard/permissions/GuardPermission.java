@@ -77,6 +77,11 @@ public enum GuardPermission {
      */
     COMMAND_WORLDGUARD("guard.command.worldguard"),
 
+    /**
+     * Permission to execute the world guard command
+     */
+    COMMAND_BUILDMODE("guard.command.buildmode"),
+
     // Player-specific ignore permissions for flags
     /**
      * Ignore permission for the BUILD flag.

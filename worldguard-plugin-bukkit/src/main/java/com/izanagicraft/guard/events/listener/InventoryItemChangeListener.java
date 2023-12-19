@@ -50,6 +50,7 @@ import com.izanagicraft.guard.GuardConstants;
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
+import com.izanagicraft.guard.permissions.GuardPermission;
 import com.izanagicraft.guard.utils.MessageUtils;
 import io.papermc.paper.event.player.PlayerPickItemEvent;
 import net.kyori.adventure.text.Component;
@@ -97,6 +98,11 @@ public class InventoryItemChangeListener extends GuardListener {
         }
 
         if(event.isCancelled()) return;
+
+        if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
+                || player.hasPermission(GuardPermission.PLAYER_ITEM_DROP.getName())) {
+            return;
+        }
 
         Location target = item.getLocation();
 
@@ -146,6 +152,11 @@ public class InventoryItemChangeListener extends GuardListener {
         }
 
         if(event.isCancelled()) return;
+
+        if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
+                || player.hasPermission(GuardPermission.PLAYER_ITEM_PICKUP.getName())) {
+            return;
+        }
 
         Location target = item.getLocation();
 

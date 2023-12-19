@@ -50,6 +50,7 @@ import com.izanagicraft.guard.GuardConstants;
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
+import com.izanagicraft.guard.permissions.GuardPermission;
 import com.izanagicraft.guard.utils.MessageUtils;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -98,6 +99,11 @@ public class PvEListener extends GuardListener {
         if ((entity instanceof Player) || !(event.getDamager() instanceof Player)) return;
 
         if (event.isCancelled()) return;
+
+        if (event.getDamager().hasPermission(GuardPermission.GROUPS_ADMIN.getName())
+                || event.getDamager().hasPermission(GuardPermission.PLAYER_DAMAGE.getName())) {
+            return;
+        }
 
         Location target = entity.getLocation();
 

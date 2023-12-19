@@ -49,6 +49,7 @@ package com.izanagicraft.guard.events.listener;
 import com.izanagicraft.guard.IzanagiWorldGuardPlugin;
 import com.izanagicraft.guard.events.GuardListener;
 import com.izanagicraft.guard.flags.GuardFlag;
+import com.izanagicraft.guard.permissions.GuardPermission;
 import com.izanagicraft.guard.utils.MessageUtils;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Location;
@@ -63,7 +64,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
  * @author <a href="https://github.com/sanguine6660">@sanguine6660</a>
  * @since 18.12.2023
  */
-public class PlayerChatListener  extends GuardListener {
+public class PlayerChatListener extends GuardListener {
     /**
      * Constructs a new GuardListener with the specified IzanagiWorldGuardPlugin.
      *
@@ -81,12 +82,16 @@ public class PlayerChatListener  extends GuardListener {
     @EventHandler
     public void onChat(AsyncChatEvent event) {
         Player player = event.getPlayer();
-        if(player == null) {
+        if (player == null) {
             event.setCancelled(true);
             return;
         }
 
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) return;
+
+        if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())) {
+            return;
+        }
 
         Location target = player.getLocation();
 
@@ -104,7 +109,7 @@ public class PlayerChatListener  extends GuardListener {
 
         // TODO: region based checks.
 
-        if(!allowAction) {
+        if (!allowAction) {
             event.setCancelled(true);
             MessageUtils.sendPrefixedMessage(player, "&cYou're not allowed to chat here. &e(TODO translation)");
         }
@@ -119,12 +124,17 @@ public class PlayerChatListener  extends GuardListener {
     @EventHandler
     public void onPreCommand(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if(player == null) {
+        if (player == null) {
             event.setCancelled(true);
             return;
         }
 
-        if(event.isCancelled()) return;
+        if (event.isCancelled()) return;
+
+        if (player.hasPermission(GuardPermission.GROUPS_ADMIN.getName())
+                || player.hasPermission(GuardPermission.PLAYER_COMMAND_EXECUTE.getName())) {
+            return;
+        }
 
         Location target = player.getLocation();
 
@@ -142,7 +152,7 @@ public class PlayerChatListener  extends GuardListener {
 
         // TODO: region based checks.
 
-        if(!allowAction) {
+        if (!allowAction) {
             event.setCancelled(true);
             MessageUtils.sendPrefixedMessage(player, "&cYou're not allowed to execute commands here. &e(TODO translation)");
         }
