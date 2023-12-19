@@ -25,6 +25,12 @@ Protects the IzanagiCraft worlds.
 
 TODO: add information
 
+### Permissions
+- [GuardPermissions Overview](./worldguard-api/src/main/java/com/izanagicraft/guard/permissions/GuardPermission.java)
+
+### Flags
+- [GuardFlag Overview](./worldguard-api/src/main/java/com/izanagicraft/guard/flags/GuardFlag.java)
+
 ---
 
 ## License
