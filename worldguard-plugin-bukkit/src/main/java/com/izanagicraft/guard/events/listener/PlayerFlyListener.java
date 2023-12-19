@@ -147,6 +147,7 @@ public class PlayerFlyListener extends GuardListener {
                         online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
                                 GuardConstants.CHAT_PREFIX + "&aYou're allowed to fly now. &e(TODO translation)"
                         ));
+                        Bukkit.getScheduler().runTaskLater(getPlugin(), () -> online.sendActionBar(Component.empty()), 20*2);
                     }
                 });
 
