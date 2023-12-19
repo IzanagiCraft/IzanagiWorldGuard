@@ -107,30 +107,27 @@ public class PlayerFlyListener extends GuardListener {
 
                 if (!flyMode && online.getAllowFlight() != allowFly && !allowFly) {
                     Bukkit.getScheduler().runTask(getPlugin(), () -> {
-                        online.setAllowFlight(false);
-                        MessageUtils.sendPrefixedMessage(online, "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground.");
-                        online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
-                                GuardConstants.CHAT_PREFIX + "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground."
-                        ));
-
                         if (spawnedFallTask.getOrDefault(online.getUniqueId(), false)) return;
-
+                        spawnedFallTask.put(online.getUniqueId(), true);
+                        MessageUtils.sendPrefixedMessage(online, "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground. &e(TODO translation)");
+                        online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
+                                GuardConstants.CHAT_PREFIX + "&cYou're not allowed to fly anymore. In (10 seconds) you'll fall to the ground. &e(TODO translation)"
+                        ));
                         Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
-                            if (!online.getAllowFlight()) {
-                                online.setFlying(false);
-                            }
+                            if (spawnedFallTask.getOrDefault(online.getUniqueId(), false)) return;
+                            online.setAllowFlight(false);
+                            online.setFlying(false);
                             spawnedFallTask.remove(online.getUniqueId());
                         }, 20 * 10);
-
-                        spawnedFallTask.put(online.getUniqueId(), true);
                     });
                 }
 
                 if (!flyMode && online.getAllowFlight() != allowFly && allowFly) {
                     Bukkit.getScheduler().runTask(getPlugin(), () -> {
                         online.setAllowFlight(true);
+                        spawnedFallTask.remove(online.getUniqueId());
                         online.sendActionBar(MessageUtils.getComponentSerializer().deserialize(
-                                GuardConstants.CHAT_PREFIX + "&cYou're allowed to fly now."
+                                GuardConstants.CHAT_PREFIX + "&aYou're allowed to fly now. &e(TODO translation)"
                         ));
                     });
                 }
