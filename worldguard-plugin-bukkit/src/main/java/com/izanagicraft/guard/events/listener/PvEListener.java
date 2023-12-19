@@ -114,17 +114,21 @@ public class PvEListener extends GuardListener {
         if (entity instanceof Animals) {
             attacked = "Animals";
             String allowAnimal = worldConfig.getString("flags." + GuardFlag.ANIMAL_DAMAGE.getFlagName(), "false");
-            if (allowAnimal.equalsIgnoreCase("true") || allowAnimal.equalsIgnoreCase("allow")) {
+            if (allowAnimal.isEmpty() || allowAnimal.equals("empty") || allowAnimal.equals("false") || allowAnimal.equals("deny")) {
+                allowAttack = false;
+            } else if (allowAnimal.equals("true") || allowAnimal.equals("allow")) {
                 allowAttack = true;
-            }
+            } else allowAttack = false;
         }
 
         if (entity instanceof Monster) {
             attacked = "Monster";
             String allowMonster = worldConfig.getString("flags." + GuardFlag.MONSTER_DAMAGE.getFlagName(), "false");
-            if (allowMonster.equalsIgnoreCase("true") || allowMonster.equalsIgnoreCase("allow")) {
+            if (allowMonster.isEmpty() || allowMonster.equals("empty") || allowMonster.equals("false") || allowMonster.equals("deny")) {
+                allowAttack = false;
+            } else if (allowMonster.equals("true") || allowMonster.equals("allow")) {
                 allowAttack = true;
-            }
+            } else allowAttack = false;
         }
 
         // TODO: region based checks.

@@ -113,7 +113,7 @@ public class BuildingListener extends GuardListener {
             allowBuild = false;
         } else if (placeBlock.equals("true") || placeBlock.equals("allow")) {
             allowBuild = true;
-        }
+        } else allowBuild = false;
 
         // TODO: region based checks.
 
@@ -160,7 +160,7 @@ public class BuildingListener extends GuardListener {
             allowBuild = false;
         } else if (breakBlock.equals("true") || breakBlock.equals("allow")) {
             allowBuild = true;
-        }
+        } else allowBuild = false;
 
         // TODO: region based checks.
 
