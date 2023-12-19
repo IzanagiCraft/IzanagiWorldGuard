@@ -169,7 +169,7 @@ public enum GuardFlag {
     ITEM_USE("item_use", List.of()),
 
     /**
-     * Allows or denies entity damage.
+     * Allows or denies player inflicting entity damage.
      */
     ENTITY_DAMAGE("entity_damage", List.of()),
 
@@ -179,7 +179,7 @@ public enum GuardFlag {
     ENTITY_SPAWN("entity_spawn", List.of()),
 
     /**
-     * Allows or denies monster damage.
+     * Allows or denies player inflicting  monster damage.
      */
     MONSTER_DAMAGE("monster_damage", List.of()),
 
@@ -189,7 +189,7 @@ public enum GuardFlag {
     MONSTER_SPAWN("monster_spawn", List.of()),
 
     /**
-     * Allows or denies animal damage.
+     * Allows or denies player inflicting animal damage.
      */
     ANIMAL_DAMAGE("animal_damage", List.of()),
 

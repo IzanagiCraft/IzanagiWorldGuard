@@ -48,15 +48,15 @@ defaultFlags:
   chatting: true
   # Allows or denies item usage (e.g., right-click actions)
   item_use: true
-  # Allows or denies entity damage
+  # Allows or denies player inflicting entity damage
   entity_damage: true
   # Allows or denies entity spawning
   entity_spawn: true
-  # Allows or denies monster damage
+  # Allows or denies player inflicting monster damage
   monster_damage: true
   # Allows or denies monster spawning
   monster_spawn: true
-  # Allows or denies animal damage
+  # Allows or denies player inflicting animal damage
   animal_damage: true
   # Allows or denies animal spawning
   animal_spawn: true
