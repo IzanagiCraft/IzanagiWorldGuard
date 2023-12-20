@@ -195,7 +195,7 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         List.of(
                 new WorldGuardCommand(this),
                 new BuildModeCommand(this)
-        ).forEach(command -> commandMap.register("guard", (GuardCommand) command));
+        ).forEach(command -> commandMap.register("guard", command));
     }
 
     /**
