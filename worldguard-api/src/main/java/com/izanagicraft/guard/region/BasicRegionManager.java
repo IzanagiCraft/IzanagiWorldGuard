@@ -61,8 +61,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @since 17.12.2023
  */
 public class BasicRegionManager implements RegionManager {
+
+    /**
+     * A map to store GuardedRegion instances, where the key is the region ID.
+     */
     private Map<String, GuardedRegion> regions;
 
+    /**
+     * Constructs a new BasicRegionManager with an empty ConcurrentHashMap for storing regions.
+     */
     public BasicRegionManager() {
         this.regions = new ConcurrentHashMap<>();
     }

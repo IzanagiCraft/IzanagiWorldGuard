@@ -58,10 +58,28 @@ import org.bukkit.Location;
  */
 public class BasicGuardedRegion implements GuardedRegion {
 
+    /**
+     * The unique identifier for the region.
+     */
     private String id;
+
+    /**
+     * The minimum point defining one corner of the cuboid region.
+     */
     private Location minPoint;
+
+    /**
+     * The maximum point defining the opposite corner of the cuboid region.
+     */
     private Location maxPoint;
 
+    /**
+     * Constructs a new BasicGuardedRegion with the specified parameters.
+     *
+     * @param id       The unique identifier for the region.
+     * @param minPoint The minimum point defining one corner of the cuboid region.
+     * @param maxPoint The maximum point defining the opposite corner of the cuboid region.
+     */
     public BasicGuardedRegion(String id, Location minPoint, Location maxPoint) {
         this.id = id;
         this.minPoint = minPoint;
