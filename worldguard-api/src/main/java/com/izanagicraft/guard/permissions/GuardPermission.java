@@ -148,6 +148,11 @@ public enum GuardPermission {
      */
     PLAYER_ITEM_USE("guard.flag.ignored.item_use"),
 
+    /**
+     * Ignore permission for the PORTAL_ENTER flag.
+     */
+    PLAYER_PORTAL_ENTER("guard.flag.ignored.portal_enter"),
+
     // default permission
     /**
      * Default permission for general use.
