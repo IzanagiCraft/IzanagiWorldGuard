@@ -53,10 +53,11 @@ subprojects {
 
     dependencies {
         compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
-        compileOnly("com.comphenix.protocol:ProtocolLib:5.1.0")
         implementation(platform("com.intellectualsites.bom:bom-newest:1.39")) // Ref: https://github.com/IntellectualSites/bom
         compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Core")
         compileOnly("com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit") { isTransitive = false }
+
+        implementation("com.izanagicraft.messages:message-format:1.0-SNAPSHOT")
     }
 
     tasks.compileJava.configure {

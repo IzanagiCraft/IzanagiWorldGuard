@@ -47,10 +47,11 @@
 package com.izanagicraft.guard;
 
 import com.izanagicraft.guard.commands.BuildModeCommand;
-import com.izanagicraft.guard.commands.GuardCommand;
 import com.izanagicraft.guard.commands.WorldGuardCommand;
 import com.izanagicraft.guard.events.listener.*;
 import com.izanagicraft.guard.utils.MessageUtils;
+import com.izanagicraft.messages.placeholders.StaticMessagePlaceholders;
+import com.izanagicraft.messages.translations.TranslationHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -90,6 +91,8 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
 
     private ExecutorService executor;
     private ScheduledExecutorService scheduler;
+
+    private TranslationHandler translationHandler;
 
     private Map<String, YamlConfiguration> worldConfigs;
     private Map<String, File> worldConfigFiles;
@@ -174,6 +177,18 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         this.scheduler = Executors.newScheduledThreadPool(this.getConfig().getInt("threading.corePoolSize", 8));
         this.worldConfigs = new ConcurrentHashMap<>();
         this.worldConfigFiles = new ConcurrentHashMap<>();
+
+        this.saveResource("translations/en.properties", false);
+        this.saveResource("translations/de.properties", false);
+        File enTrans = new File(this.getDataFolder(), "translations/en.properties");
+        File deTrans = new File(this.getDataFolder(), "translations/de.properties");
+        this.translationHandler = new TranslationHandler(enTrans, deTrans);
+
+        StaticMessagePlaceholders.addDefaultReplacements(Map.of(
+                "prefix", GuardConstants.PREFIX,
+                "chatPrefix", GuardConstants.CHAT_PREFIX,
+                "chatColor", GuardConstants.CHAT_COLOR
+        ));
 
         Bukkit.getScheduler().cancelTasks(this);
 
@@ -264,5 +279,9 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
      */
     public ScheduledExecutorService getScheduler() {
         return scheduler;
+    }
+
+    public TranslationHandler getTranslationHandler() {
+        return translationHandler;
     }
 }

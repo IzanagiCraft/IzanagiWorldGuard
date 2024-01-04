@@ -100,16 +100,16 @@ public class BuildModeCommand extends GuardCommand {
             return;
         }
         if (!source.isPlayer()) {
-            MessageUtils.sendPrefixedMessage(source, "&cYou can only run this command as a player.");
+            MessageUtils.sendMessage(source, plugin.getTranslationHandler().translate("command.player.only"));
             return;
         }
 
-        if (buildModePlayers.contains(source.getPlayer().getUniqueId())) {
+        if (isBuildMode(source.getPlayer())) {
             buildModePlayers.remove(source.getPlayer().getUniqueId());
-            MessageUtils.sendPrefixedMessage(source, "&7You successfully &cleft &7the build mode.");
+            MessageUtils.sendMessage(source, plugin.getTranslationHandler().translate(source.getPlayer().locale(), "command.buildmode.left"));
         } else {
             buildModePlayers.add(source.getPlayer().getUniqueId());
-            MessageUtils.sendPrefixedMessage(source, "&7You successfully &ajoined &7the build mode.");
+            MessageUtils.sendMessage(source, plugin.getTranslationHandler().translate(source.getPlayer().locale(), "command.buildmode.joined"));
         }
     }
 
