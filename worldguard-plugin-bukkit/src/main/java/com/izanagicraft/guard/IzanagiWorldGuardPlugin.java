@@ -281,6 +281,10 @@ public class IzanagiWorldGuardPlugin extends JavaPlugin {
         return scheduler;
     }
 
+    /**
+     * Gets the message translation handler instance used by the plugin
+     * @return The message translation handler
+     */
     public TranslationHandler getTranslationHandler() {
         return translationHandler;
     }
